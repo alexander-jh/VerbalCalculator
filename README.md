@@ -1,4 +1,4 @@
-###Build Instructions for Docker
+### Build Instructions for Docker
 ```
 git clone https://github.com/alexander-jh/VerbalCalculator.git
 docker build -t verbalcalc .
