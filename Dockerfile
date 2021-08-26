@@ -7,5 +7,6 @@ FROM openjdk:11.0.1-jdk-slim
 WORKDIR /verbalcalculator
 COPY ./data ./data
 COPY ./execute.sh ./execute.sh
+COPY ./config.json ./config.json
 COPY --from=maven ./target ./target
 CMD ["bash", "execute.sh"]

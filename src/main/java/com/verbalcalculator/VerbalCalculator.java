@@ -4,8 +4,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-import java.io.FileNotFoundException;
-
 @Command(name = "VerbalCalculator",
         version = "VerbalCalculator 1.0",
         mixinStandardHelpOptions = true)
@@ -16,8 +14,9 @@ public class VerbalCalculator implements Runnable {
 
     @Override
     public void run() {
-        Agent agent = new Agent();
+        Agent agent;
         try {
+            agent = new Agent();
             String[] res = agent.parseAudio(file);
             Parser parser = new Parser(res);
             int out = parser.parse();
