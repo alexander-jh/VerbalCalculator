@@ -32,23 +32,70 @@ public class Parser {
         NUMBERS.put("seven", 7);
         NUMBERS.put("eight", 8);
         NUMBERS.put("nine", 9);
+        NUMBERS.put("ten", 10);
+        NUMBERS.put("eleven", 11);
+        NUMBERS.put("twelve", 12);
+        NUMBERS.put("thirteen", 13);
+        NUMBERS.put("fourteen", 14);
+        NUMBERS.put("fifteen", 15);
+        NUMBERS.put("sixteen", 16);
+        NUMBERS.put("seventeen", 17);
+        NUMBERS.put("eighteen", 18);
+        NUMBERS.put("nineteen", 19);
+        NUMBERS.put("twenty", 20);
+        NUMBERS.put("thirty", 30);
+        NUMBERS.put("fourty", 40);
+        NUMBERS.put("fifty", 50);
+        NUMBERS.put("sixty", 60);
+        NUMBERS.put("seventy", 70);
+        NUMBERS.put("eighty", 80);
+        NUMBERS.put("ninety", 90);
     }
 
     public Parser(String[] input) throws Exception {
-        for (int i = 0; i < input.length; i++) {
-            System.out.println(input[i]);
-        }
-        if (input.length > 3) {
+        if (input.length > 5) {
             throw new Exception("Unexpected array size\n");
         }
-        if (NUMBERS.containsKey(input[0]) && NUMBERS.containsKey(input[2])
-                && OPERATORS.containsKey(input[1])) {
-            this.first = NUMBERS.get(input[0]);
-            this.second = NUMBERS.get(input[2]);
-            this.operator = OPERATORS.get(input[1]);
+        int j = input.length;
+        if (j == 3) {
+            if (NUMBERS.containsKey(input[0]) && NUMBERS.containsKey(input[2])
+                    && OPERATORS.containsKey(input[1])) {
+                this.first = NUMBERS.get(input[0]);
+                this.second = NUMBERS.get(input[2]);
+                this.operator = OPERATORS.get(input[1]);
+            } else {
+                throw new Exception("Unexpected input\n");
+            }
+        } else if (j == 4) {
+            if (OPERATORS.containsKey(input[1]) && NUMBERS.containsKey(input[0])
+                    && NUMBERS.containsKey(input[2])
+                    && NUMBERS.containsKey(input[3])) {
+                this.first = NUMBERS.get(input[0]);
+                this.operator = OPERATORS.get(input[1]);
+                this.second = NUMBERS.get(input[2]) + NUMBERS.get(input[3]);
+            } else if (OPERATORS.containsKey(input[2])
+                    && NUMBERS.containsKey(input[1])
+                    && NUMBERS.containsKey(input[0])
+                    && NUMBERS.containsKey(input[3])) {
+                this.first = NUMBERS.get(input[0]) + NUMBERS.get(input[1]);
+                this.operator = OPERATORS.get(input[2]);
+                this.second = NUMBERS.get(input[3]);
+            } else {
+                throw new Exception("Unexpected input\n");
+            }
         } else {
-            throw new Exception("Unexpected input\n");
+            if (OPERATORS.containsKey(input[2]) && NUMBERS.containsKey(input[0])
+                    && NUMBERS.containsKey(input[1])
+                    && NUMBERS.containsKey(input[3])
+                    && NUMBERS.containsKey(input[4])) {
+                this.first = NUMBERS.get(input[0]) + NUMBERS.get(input[1]);
+                this.operator = OPERATORS.get(input[2]);
+                this.second = NUMBERS.get(input[3]) + NUMBERS.get(input[4]);
+            } else {
+                throw new Exception("Unexpected input\n");
+            }
         }
+
     }
 
     public int parse() throws Exception {
